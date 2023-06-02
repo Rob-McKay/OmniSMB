@@ -1,0 +1,20 @@
+/* -*-  mode:c; c-default-style "bsd" tab-width:8; c-basic-offset:4; indent-tabs-mode:nil;  -*- */
+/*
+ * Copyright 2023 Rob McKay
+ *
+ */
+
+/* International support functions */
+
+#include <kernel.h>
+#include "OmniClient.h"
+#include "omnismb.h"
+
+#ifndef __message_trans_h
+#define __message_trans_h
+
+const char *message_trans_lookup(const char *token, const char *arg1);
+
+_kernel_oserror *message_trans_error_lookup(err_number_type which);
+
+#endif

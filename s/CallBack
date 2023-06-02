@@ -1,0 +1,30 @@
+; s.callback
+;
+; OmniSMB callback routines
+
+        AREA    |C$$code|, CODE, READONLY
+
+        GET     Hdr:ListOpts
+        GET     Hdr:Macros
+        GET     Hdr:System
+        GET     Hdr:ModHand
+
+        EXPORT  |delete_module|
+
+; Register a transient callback to delete the module
+
+|delete_module|
+        Push    "lr"
+        MOV     r1, r0                  ; pass the module title address to the callback handler - received in r12
+        ADR     r0, delete_module_cb
+        SWI     XOS_AddCallBack
+        Pull    "pc"
+
+|delete_module_cb|
+        Push    "r0-r1, lr"
+        MOV     r0, #ModHandReason_Delete
+        MOV     r1, r12
+        SWI     XOS_Module
+        Pull    "r0-r1, pc"
+
+        END

@@ -1,0 +1,7 @@
+/* -*-  mode:c; c-default-style "bsd" tab-width:8; c-basic-offset:4; indent-tabs-mode:nil;  -*- */
+/*
+ * Copyright 2023 Rob McKay
+ *
+ */
+
+extern void delete_module(char *module_title);

@@ -1,0 +1,30 @@
+/* -*-  mode:c; c-default-style "bsd" tab-width:8; c-basic-offset:4; indent-tabs-mode:nil;  -*- */
+/*
+ * Copyright 2023 Rob McKay
+ *
+ */
+
+#include "Global/RISCOS.h"
+#include "Global/Services.h"
+#include "VersionNum"
+
+initialisation-code:    osmb_initialise
+finalisation-code:      osmb_finalise
+
+service-call-handler:   osmb_service   Service_ResourceFSStarting,
+                                       Service_OmniAction
+
+title-string:           OmniSMB
+
+help-string:            OmniSMB Module_MajorVersion_CMHG Module_MinorVersion_CMHG
+
+date-string:            Module_Date_CMHG
+
+//generic-veneers:        timer_entry/timer_handler,
+//                        callback_entry/callback_handler
+
+//event-handler:          inet_entry/inet_handler Event_Internet
+
+swi-chunk-base-number:  0xCA500         // User space SWI - need to change before release
+swi-handler-code:       osmb_swi
+swi-decoding-table:     OmniSMB, OmniOp

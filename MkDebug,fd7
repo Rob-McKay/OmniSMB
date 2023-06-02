@@ -1,0 +1,3 @@
+Dir <Obey$Dir>
+set CInc$PATH <APCSExport$Dir>.C.
+amu debug THROWBACK=-throwback

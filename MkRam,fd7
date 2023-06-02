@@ -1,0 +1,4 @@
+Dir <Obey$Dir>
+set CInc$PATH <APCSExport$Dir>.C.
+WimpSlot -min 1024k
+amu standalone THROWBACK=-throwback

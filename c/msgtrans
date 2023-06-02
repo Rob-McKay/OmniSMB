@@ -1,0 +1,57 @@
+/* -*-  mode:c; c-default-style "bsd" tab-width:8; c-basic-offset:4; indent-tabs-mode:nil;  -*- */
+/*
+ * Copyright 2023 Rob McKay
+ *
+ */
+
+/* International support functions */
+
+#include "message_trans.h"
+#include <swis.h>
+#include <stdio.h>
+
+int msg_struct[4];
+
+const char *message_trans_lookup(const char *token, const char *arg1)
+{
+    _kernel_oserror *err;
+    _kernel_swi_regs r;
+    static char string[64];
+
+    r.r[0] = (int)msg_struct;
+    r.r[1] = (int)token;
+    r.r[2] = (int)string;
+    r.r[3] = sizeof(string);
+    r.r[4] = (int)arg1;
+    r.r[5] = r.r[6] = r.r[7] = 0;
+    err = _kernel_swi(MessageTrans_Lookup, &r, &r);
+    if (err)
+    {
+        return "???";
+    }
+    return (const char *)string;
+}
+
+_kernel_oserror *message_trans_error_lookup(err_number_type which)
+{
+    struct
+    {
+        int errnum;
+        char token[8];
+    } interrblk;
+
+    static _kernel_oserror error_block;
+    _kernel_swi_regs r;
+
+    sprintf(interrblk.token, "E%02x", which - client_ERRBASE);
+    interrblk.errnum = which;
+
+    r.r[0] = (int)&interrblk;
+    r.r[1] = (int)msg_struct;
+    r.r[2] = (int)&error_block;
+    r.r[3] = sizeof(error_block);
+    r.r[4] = r.r[5] = r.r[6] = r.r[7] = 0;
+
+    return _kernel_swi(MessageTrans_ErrorLookup, &r, &r);
+}
+

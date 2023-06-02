@@ -1,0 +1,88 @@
+/* -*-  mode:c; c-default-style "bsd" tab-width:8; c-basic-offset:4; indent-tabs-mode:nil;  -*- */
+/*
+ * Copyright 2023 Rob McKay
+ *
+ */
+
+/* OmniClient SWIs  - */
+
+#ifndef __omniclient_h
+#define __omniclient_h
+
+#define Omni_EnumerateMounts 0x04A200
+#define Omni_RegisterClient 0x04A201
+#define Omni_DeregisterClient 0x04A202
+#define Omni_MessageLookup 0x04A203
+#define Omni_ConvertClientToAcorn 0x04A204
+#define Omni_ConvertAcornToClient 0x04A205
+#define Omni_ConvertTime 0x04A206
+#define Omni_Printers 0x04A207
+#define Omni_CreateJob 0x04A208
+#define Omni_SendJob 0x04A209
+#define Omni_EndJob 0x04A20A
+#define Omni_AbortJob 0x04A20B
+#define Omni_JobStatus 0x04A20C
+#define Omni_ClearJob 0x04A20D
+#define Omni_PrinterInfo 0x04A20E
+#define Omni_EnumerateJobs 0x04A20F
+#define Omni_NameLookup 0x04A210
+#define Omni_TraceFile 0x04A211
+
+// Subreasons of OmniOp entry point
+
+enum OmniOp_ReasonCode
+{
+    OmniOp_Mount = 0,
+    OmniOp_Dismount,
+    OmniOp_Free,
+    OmniOp_EnumerateServers,
+    OmniOp_EnumerateMountsOnServer,
+    OmniOp_EnumerateActiveMounts,
+    OmniOp_OpenRoot,
+    OmniOp_OpenUserRoot,
+    OmniOp_GetInactiveMountInfo,
+    OmniOp_GetActiveMountInfo,
+    OmniOp_CreatePrintJob,
+    OmniOp_SendPrintJobData,
+    OmniOp_EndPrintJob,
+    OmniOp_AbortPrintJob,
+    OmniOp_GetPrintJobInfo,
+    OmniOp_ClearPrintJob,
+    OmniOp_EnumeratePrinters,
+    OmniOp_DomainLogout
+};
+
+// Flags for Omni_Register
+#define OmniRegisterFlag_FilingSystem (1U << 0U)
+#define OmniRegisterFlag_NeedUser (1U << 1U)
+#define OmniRegisterFlag_NeedPass (1U << 2U)
+#define OmniRegisterFlag_NeedPath (1U << 3U)
+#define OmniRegisterFlag_NeedAuth (1U << 4U)
+#define OmniRegisterFlag_AnonymousMounts (1U << 5U)
+#define OmniRegisterFlag_SpecialAuth (1U << 6U)
+
+#define OmniRegisterFlag_Printer (1U << 8U)
+#define OmniRegisterFlag_NeedPrinterPass (1U << 9U)
+#define OmniRegisterFlag_NeedPrintJobSize (1U << 10U)
+#define OmniRegisterFlag_ExtensionShift (16U)
+#define OmniRegisterFlag_ExtensionMask (0xFF << OmniRegisterFlag_ExtensionShift)
+
+// Subreasons of Omni_EnumerateMounts
+
+enum Omni_EnumerateMounts_ReasonCode
+{
+    OmniEnumerateMounts_Servers = 0,
+    OmniEnumerateMounts_ActiveMounts,
+    OmniEnumerateMounts_Printers
+};
+
+/* Subreasons of Service_OmniAction */
+
+#define Service_OmniAction_Starting (0)
+#define Service_OmniAction_Died (1)
+
+#define omni_ERRBASE			0x80d100
+#define client_ERRBASE			omni_ERRBASE + 32	/* Allocated sub-block */
+
+
+#endif
