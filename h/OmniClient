@@ -33,23 +33,23 @@
 enum OmniOp_ReasonCode
 {
     OmniOp_Mount = 0,
-    OmniOp_Dismount,
-    OmniOp_Free,
-    OmniOp_EnumerateServers,
-    OmniOp_EnumerateMountsOnServer,
-    OmniOp_EnumerateActiveMounts,
-    OmniOp_OpenRoot,
-    OmniOp_OpenUserRoot,
-    OmniOp_GetInactiveMountInfo,
-    OmniOp_GetActiveMountInfo,
-    OmniOp_CreatePrintJob,
-    OmniOp_SendPrintJobData,
-    OmniOp_EndPrintJob,
-    OmniOp_AbortPrintJob,
-    OmniOp_GetPrintJobInfo,
-    OmniOp_ClearPrintJob,
-    OmniOp_EnumeratePrinters,
-    OmniOp_DomainLogout
+    OmniOp_Dismount = 1,
+    OmniOp_Free = 2,
+    OmniOp_EnumerateServers = 3,
+    OmniOp_EnumerateMountsOnServer = 4,
+    OmniOp_EnumerateActiveMounts = 5,
+    OmniOp_OpenRoot = 6,
+    OmniOp_OpenUserRoot = 7,
+    OmniOp_GetInactiveMountInfo = 8,
+    OmniOp_GetActiveMountInfo = 9,
+    OmniOp_CreatePrintJob = 10,
+    OmniOp_SendPrintJobData = 11,
+    OmniOp_EndPrintJob = 12,
+    OmniOp_AbortPrintJob = 13,
+    OmniOp_GetPrintJobInfo = 14,
+    OmniOp_ClearPrintJob = 15,
+    OmniOp_EnumeratePrinters = 16,
+    OmniOp_DomainLogout = 17
 };
 
 // Flags for Omni_Register

@@ -20,10 +20,7 @@ help-string:            OmniSMB Module_MajorVersion_CMHG Module_MinorVersion_CMH
 
 date-string:            Module_Date_CMHG
 
-//generic-veneers:        timer_entry/timer_handler,
-//                        callback_entry/callback_handler
-
-//event-handler:          inet_entry/inet_handler Event_Internet
+generic-veneers:        callback_entry/callback_handler
 
 swi-chunk-base-number:  0xCA500         // User space SWI - need to change before release
 swi-handler-code:       osmb_swi

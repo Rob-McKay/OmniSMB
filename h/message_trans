@@ -7,11 +7,25 @@
 /* International support functions */
 
 #include <kernel.h>
+#include <swis.h>
 #include "OmniClient.h"
 #include "omnismb.h"
 
 #ifndef __message_trans_h
 #define __message_trans_h
+
+extern int msg_struct[4];
+
+inline void message_trans_close_file(void)
+{
+    _swix(MessageTrans_CloseFile, _IN(0), msg_struct);
+}
+
+inline _kernel_oserror *message_trans_open_file(void)
+{
+    _swix(MessageTrans_OpenFile, _INR(0, 2),
+          msg_struct, "Resources:$.ThirdParty.OmniClient.OmniSMB.Messages", 0);
+}
 
 const char *message_trans_lookup(const char *token, const char *arg1);
 
